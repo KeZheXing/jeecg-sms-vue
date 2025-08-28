@@ -1,48 +1,51 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
-import { getAllRolesListNoByTenant } from './user.api';
+import { getAllRolesListNoByTenant, getAllTenantList } from './user.api';
 import { rules } from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
 export const columns: BasicColumn[] = [
   {
-    title: '用户账号',
-    dataIndex: 'username',
+    title: '设备编号',
+    dataIndex: 'deviceCode',
     width: 120,
   },
   {
-    title: '余额',
-    dataIndex: 'balance',
+    title: '设备ID',
+    dataIndex: 'deviceId',
     width: 100,
   },
   {
-    title: '今日发送',
+    title: '绑定用户',
+    dataIndex: 'bindUser',
+    width: 100,
+  },
+  {
+    title: '今日任务处理量',
+    dataIndex: 'taskNum',
+    width: 100,
+  },
+  {
+    title: '今日发送量',
     dataIndex: 'send',
-    width: 100,
-  },
-  {
-    title: '今日收到',
-    dataIndex: 'receive',
-    width: 100,
-  },
-  {
-    title: '今日失败',
-    dataIndex: 'failed',
-    width: 100,
-  },
-  {
-    title: '今日添加任务',
-    dataIndex: 'addTask',
-    width: 100,
-  },
-  {
-    title: '今日已处理任务',
-    dataIndex: 'handleTask',
-    width: 100,
-  },
-  {
-    title: '状态',
-    dataIndex: 'status_dictText',
     width: 80,
+  },
+  {
+    title: '今日接收量',
+    dataIndex: 'receive',
+    width: 80,
+  },
+  {
+    title: '回复率',
+    dataIndex: 'reply',
+    width: 80,
+  },
+  {
+    title: '设备状态',
+    dataIndex: 'deviceStatus',
+    width: 80,
+    customRender: ({ text }) => {
+      return render.renderDict(text, 'is_open');
+    },
   },
 ];
 
@@ -64,31 +67,30 @@ export const recycleColumns: BasicColumn[] = [
     customRender: render.renderAvatar,
   },
   {
-    title: '性别',
+    title: '启动',
     dataIndex: 'sex',
     width: 80,
     sorter: true,
     customRender: ({ text }) => {
-      return render.renderDict(text, 'sex');
+      return render.renderDict(text, 'is_open');
     },
   },
 ];
 
 export const searchFormSchema: FormSchema[] = [
   {
-    label: '账号',
-    field: 'username',
+    label: '设备编号',
+    field: 'deviceCode',
     component: 'JInput',
     //colProps: { span: 6 },
   },
   {
-    label: '用户状态',
-    field: 'status',
+    label: '设备状态',
+    field: 'deviceCode',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'user_status',
+      dictCode: 'is_open',
       placeholder: '请选择状态',
-      stringToNumber: true,
     },
    //colProps: { span: 6 },
   },
@@ -102,222 +104,61 @@ export const formSchema: FormSchema[] = [
     show: false,
   },
   {
-    label: '用户账号',
-    field: 'username',
+    label: '设备编号',
+    field: 'deviceCode',
     component: 'Input',
     required: true,
     dynamicDisabled: ({ values }) => {
       return !!values.id;
     },
-    dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'username', model, schema, true),
+    // dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'username', model, schema, true),
   },
   {
-    label: '登录密码',
-    field: 'password',
-    component: 'StrengthMeter',
-    componentProps:{
-      autocomplete: 'new-password',
-    },
-    rules: [
-      {
-        required: true,
-        message: '请输入登录密码',
-      },
-      {
-        pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
-        message: '密码由8位数字、大小写字母和特殊符号组成!',
-      },
-    ],
-  },
-  {
-    label: '确认密码',
-    field: 'confirmPassword',
-    component: 'InputPassword',
-    dynamicRules: ({ values }) => rules.confirmPassword(values, true),
-  },
-  {
-    label: '用户姓名',
-    field: 'realname',
+    label: '设备ID',
+    field: 'deviceId',
     required: true,
     component: 'Input',
   },
   {
-    label: '余额',
-    field: 'balance',
+    label: '设备账号',
+    field: 'deviceUserName',
     required: true,
     component: 'Input',
-  },
-  {
-    label: '发送费用',
-    field: 'sendCost',
+  }, {
+    label: '设备密码',
+    field: 'devicePassword',
     required: true,
     component: 'Input',
-  },
-  {
-    label: '接收费用',
-    field: 'receiveCost',
+  },{
+    label: '发送间隔/s',
+    field: 'interval',
     required: true,
     component: 'Input',
-  },
-  {
-    label: '工号',
-    field: 'workNo',
+  },{
+    label: '发送上限',
+    field: 'sendLimit',
     required: true,
     component: 'Input',
-    dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'work_no', model, schema, true),
-  },
-  {
-    label: '职务',
-    field: 'post',
-    required: false,
-    component: 'JSelectPosition',
-    componentProps: {
-      labelKey: 'name',
-    },
-  },
-  {
-    label: '角色',
-    field: 'selectedroles',
-    component: 'ApiSelect',
-    componentProps: {
-      mode: 'multiple',
-      api: getAllRolesListNoByTenant,
-      labelField: 'roleName',
-      valueField: 'id',
-      immediate: false,
-    },
-  },
-  {
-    label: '所属部门',
-    field: 'selecteddeparts',
-    component: 'JSelectDept',
-    componentProps: ({ formActionType, formModel }) => {
-      return {
-        sync: false,
-        checkStrictly: true,
-        defaultExpandLevel: 2,
-
-        onSelect: (options, values) => {
-          const { updateSchema } = formActionType;
-          //所属部门修改后更新负责部门下拉框数据
-          updateSchema([
-            {
-              field: 'departIds',
-              componentProps: { options },
-            },
-          ]);
-          //update-begin---author:wangshuai---date:2024-05-11---for:【issues/1222】用户编辑界面“所属部门”与“负责部门”联动出错整---
-          if(!values){
-            formModel.departIds = [];
-            return;
-          }
-          //update-end---author:wangshuai---date:2024-05-11---for:【issues/1222】用户编辑界面“所属部门”与“负责部门”联动出错整---
-          //所属部门修改后更新负责部门数据
-          formModel.departIds && (formModel.departIds = formModel.departIds.filter((item) => values.value.indexOf(item) > -1));
-        },
-      };
-    },
-  },
-  {
-    label: '租户',
-    field: 'relTenantIds',
-    component: 'JSearchSelect',
-    componentProps: {
-      dict:"sys_tenant,name,id",
-      async: true,
-      multiple: true
-    },
-  },
-  {
-    label: '身份',
-    field: 'userIdentity',
-    component: 'RadioGroup',
-    defaultValue: 1,
-    componentProps: ({ formModel }) => {
-      return {
-        options: [
-          { label: '普通用户', value: 1, key: '1' },
-          { label: '上级', value: 2, key: '2' },
-        ],
-        onChange: () => {
-          formModel.userIdentity == 1 && (formModel.departIds = []);
-        },
-      };
-    },
-  },
-  {
-    label: '负责部门',
-    field: 'departIds',
-    component: 'Select',
-    componentProps: {
-      mode: 'multiple',
-    },
-    ifShow: ({ values }) => values.userIdentity == 2,
-  },
-  {
-    label: '头像',
-    field: 'avatar',
-    component: 'JImageUpload',
-    componentProps: {
-      fileMax: 1,
-    },
-  },
-  {
-    label: '生日',
-    field: 'birthday',
-    component: 'DatePicker',
-  },
-  {
-    label: '性别',
-    field: 'sex',
+  },  {
+    label: '设备状态',
+    field: 'deviceStatus',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'sex',
-      placeholder: '请选择性别',
-      stringToNumber: true,
+      dictCode: 'is_open',
+      placeholder: '是否启动',
     },
-  },
-  {
-    label: '邮箱',
-    field: 'email',
-    component: 'Input',
-    required: true,
-    dynamicRules: ({ model, schema }) => {
-      return [
-        { ...rules.duplicateCheckRule('sys_user', 'email', model, schema, true)[0], trigger: 'blur' },
-        { ...rules.rule('email', false)[0], trigger: 'blur' },
-      ];
-    },
-  },
-  {
-    label: '手机号码',
-    field: 'phone',
-    component: 'Input',
-    required: true,
-    dynamicRules: ({ model, schema }) => {
-      return [
-        { ...rules.duplicateCheckRule('sys_user', 'phone', model, schema, true)[0], trigger: 'blur' },
-        { pattern: /^1[3456789]\d{9}$/, message: '手机号码格式有误', trigger: 'blur' },
-      ];
-    },
-  },
-  {
-    label: '座机',
-    field: 'telephone',
-    component: 'Input',
-    rules: [{ pattern: /^0\d{2,3}-[1-9]\d{6,7}$/, message: '请输入正确的座机号码' }],
-  },
-  {
-    label: '工作流引擎',
-    field: 'activitiSync',
-    defaultValue: 1,
-    component: 'JDictSelectTag',
+  },{
+    field: 'bindUser',
+    component: 'UserSelect',
+    label: '绑定用户',
+    store:'username',
+    helpMessage: ['component模式'],
+    colProps: { span: 12 },
     componentProps: {
-      dictCode: 'activiti_sync',
-      type: 'radio',
-      stringToNumber: true,
-    },
-  },
+      multi:false,
+      store:'username'
+    }
+  }
 ];
 
 export const formPasswordSchema: FormSchema[] = [

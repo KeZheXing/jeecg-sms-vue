@@ -6,7 +6,7 @@
     </div>
     <div class="content">
       <p class="date">
-        <span v-if="inversion === 'ai'" style="margin-right: 10px">{{appData.name || 'AI助手'}}</span>
+        <span v-if="inversion === 'ai'" style="margin-right: 10px">{{appData.name || 'CRM'}}</span>
         <span>{{ dateTime }}</span>
       </p>
       <div v-if="inversion === 'user' && images && images.length>0" class="images">

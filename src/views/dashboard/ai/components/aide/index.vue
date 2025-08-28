@@ -3,13 +3,13 @@
     <a-popconfirm
       :open="popconfirmVisible"
       placement="topRight"
-      title="确定AI助手退出吗？"
+      title="确定CRM退出吗？"
       ok-text="确定"
       cancel-text="取消"
       @cancel="handleCancel"
       @confirm="handleConfirm"
     >
-      <img :src="aiImage" alt="ai助手" />
+      <img :src="aiImage" alt="CRM" />
     </a-popconfirm>
   </div>
 </template>

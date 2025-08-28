@@ -5,6 +5,8 @@ import { useMessage } from '/@/hooks/web/useMessage';
 const { createConfirm } = useMessage();
 
 export enum Api {
+  smsMessageList = '/sms/message/listAll',
+  smsMessageAdd = '/sms/message/add',
   list = '/sys/message/sysMessageTemplate/list',
   delete = '/sys/message/sysMessageTemplate/delete',
   deleteBatch = '/sys/message/sysMessageTemplate/deleteBatch',
@@ -16,7 +18,7 @@ export enum Api {
   send = '/sys/message/sysMessageTemplate/sendMsg',
 }
 
-export const list = (params) => defHttp.get({ url: Api.list, params });
+export const list = (params) => defHttp.get({ url: Api.smsMessageList, params });
 
 /**
  * 批量删除
@@ -49,7 +51,7 @@ export const saveOrUpdate = (params, isUpdate) => {
   if (unref(isUpdate)) {
     return defHttp.put({ url: Api.edit, params });
   } else {
-    return defHttp.post({ url: Api.save, params });
+    return defHttp.post({ url: Api.smsMessageAdd, params });
   }
 };
 

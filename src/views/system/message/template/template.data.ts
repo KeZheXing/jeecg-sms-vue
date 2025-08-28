@@ -4,35 +4,37 @@ import { filterDictTextByCache } from '/@/utils/dict/JDictSelectUtil';
 
 export const columns: BasicColumn[] = [
   {
-    title: '模板标题',
-    dataIndex: 'templateName',
+    title: '设备编号',
+    dataIndex: 'messageDeviceCode',
     width: 80,
   },
   {
-    title: '模板编码',
-    dataIndex: 'templateCode',
+    title: '客户信息',
+    dataIndex: 'messageTo',
     width: 100,
   },
   {
-    title: '通知模板',
-    dataIndex: 'templateContent',
+    title: '内容',
+    dataIndex: 'messageContent',
     width: 150,
   },
   {
-    title: '模板类型',
-    dataIndex: 'templateType',
+    title: '类型',
+    dataIndex: 'messageType',
     width: 100,
     customRender: ({ text }) => filterDictTextByCache('msgType', text),
   },
   {
-    title: '是否应用',
-    dataIndex: 'useStatus',
+    title: '任务状态',
+    dataIndex: 'messageStatus',
     width: 90,
     customRender: function ({ text }) {
-      if (text == '1') {
-        return '是';
-      } else {
-        return '否';
+      if (text == '0') {
+        return '待处理';
+      } else if (text == '1') {
+        return '已发送';
+      }else if (text == '1') {
+        return '失败';
       }
     },
   },
@@ -40,21 +42,26 @@ export const columns: BasicColumn[] = [
 
 export const searchFormSchema: FormSchema[] = [
   {
-    label: '模板标题',
-    field: 'templateName',
+    label: '设备编码',
+    field: 'messageDeviceCode',
     component: 'Input',
   },
   {
-    label: '模板编码',
-    field: 'templateCode',
+    label: '客户信息',
+    field: 'messageTo',
     component: 'Input',
   },
   {
-    label: '模板类型',
-    field: 'templateType',
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'msgType',
+    label: '消息状态',
+    field: 'messageType',
+    customRender: function ({ text }) {
+      if (text == '0') {
+        return '待处理';
+      } else if (text == '1') {
+        return '已发送';
+      }else if (text == '1') {
+        return '失败';
+      }
     },
   },
 ];
@@ -65,22 +72,6 @@ export const formSchemas: FormSchema[] = [
     field: 'id',
     component: 'Input',
     show: false,
-  },
-  {
-    label: '模板标题',
-    field: 'templateName',
-    component: 'Input',
-    required: true,
-  },
-  {
-    label: '模板编码',
-    field: 'templateCode',
-    component: 'Input',
-    dynamicRules: ({ model, schema }) => {
-      return [ ...rules.duplicateCheckRule('sys_sms_template', 'template_code', model, schema, true)];
-    },
-    // 编辑模式下不可修改编码
-    dynamicDisabled: (params) => !!params.values.id,
   },
   {
     label: '模板类型',
@@ -95,25 +86,20 @@ export const formSchemas: FormSchema[] = [
     required: true,
   },
   {
-    label: '模板分类',
-    field: 'templateCategory',
-    component: 'JDictSelectTag',
+    label: '目标号码',
+    field: 'targetNums',
+    component: 'InputTextArea',
     componentProps: {
-      dictCode: 'msgCategory',
-      placeholder: '请选择模板分类',
-    }
-  },
-  {
-    label: '是否应用',
-    field: 'useStatus',
-    component: 'JSwitch',
-    componentProps: {
-      options: ['1', '0'],
+      placeholder: "英文逗号分隔",
+      autoSize: {
+        minRows: 8,
+        maxRows: 8,
+      },
     },
   },
   {
-    label: '模板内容',
-    field: 'templateContent',
+    label: '发送内容',
+    field: 'messageContent',
     component: 'InputTextArea',
     componentProps: {
       autoSize: {
@@ -128,7 +114,7 @@ export const formSchemas: FormSchema[] = [
 
   {
     label: '模板内容',
-    field: 'templateContent',
+    field: 'messageContent',
     component: 'JEditor',
     ifShow: ({ values }) => {
       return ['2', '4'].includes(values.templateType);
@@ -136,7 +122,7 @@ export const formSchemas: FormSchema[] = [
   },
   {
     label: '模板内容',
-    field: 'templateContent',
+    field: 'messageContent',
     component: 'JMarkdownEditor',
     ifShow: ({ values }) => {
       return ['5'].includes(values.templateType);

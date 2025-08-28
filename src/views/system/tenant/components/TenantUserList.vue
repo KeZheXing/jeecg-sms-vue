@@ -59,6 +59,7 @@ const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data
 const title = '成员';
 //表单提交事件
 async function handleSubmit(v) {
+  alert("OK")
   closeModal();
 }
 

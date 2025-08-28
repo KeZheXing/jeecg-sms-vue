@@ -12,7 +12,7 @@ const ChatRoutes: RouteRecordRaw[] = [
       title: 'AI聊天',
       ignoreAuth: true,
     },
-  },  
+  },
   {
     path: "/ai/app/chatIcon/:appId",
     name: "ai-chatIcon-@appId",
@@ -35,7 +35,7 @@ const ChatRoutes: RouteRecordRaw[] = [
         name: "ai-chat-@appId",
         component: () => import("/@/views/super/airag/aiapp/chat/AiChat.vue"),
         meta: {
-          title:'AI助手',
+          title:'CRM',
           ignoreAuth: false,
         },
       },
@@ -44,7 +44,7 @@ const ChatRoutes: RouteRecordRaw[] = [
         name: "ai-chat",
         component: () => import("/@/views/super/airag/aiapp/chat/AiChat.vue"),
         meta: {
-          title:'AI助手',
+          title:'CRM',
           ignoreAuth: false,
         },
       }

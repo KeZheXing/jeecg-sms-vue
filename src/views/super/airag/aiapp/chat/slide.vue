@@ -2,10 +2,10 @@
   <div class="slide-wrap">
     <div class="header">
       <img class="header-image" :src="getImage()" />
-      <div class="header-name">{{ appData.name || 'AI助手' }}</div>
+      <div class="header-name">{{ appData.name || 'CRM' }}</div>
     </div>
     <div class="createArea">
-      <a-button type="dashed" @click="handleCreate">新建聊天</a-button>
+<!--      <a-button type="dashed" @click="handleCreate">新建聊天</a-button>-->
     </div>
     <div class="historyArea">
       <ul>
@@ -16,7 +16,7 @@
           :class="[item.id == dataSource.active ? 'active' : 'normal', dataSource.history.length == 1 ? 'last' : '']"
           @click="handleToggleChat(item, index)"
         >
-          <i class="icon message">
+          <i class="icon message" :style="item.conversationStatus=='1'?'color:green':(item.conversationStatus=='2'?'color:red':'')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -42,7 +42,7 @@
             @change="handleInputChange"
             @keyup.enter="inputBlur(item)"
           />
-          <span class="title" v-else>{{ item.title }}</span>
+          <span class="title" v-else >{{ item.title }}</span>
           <span class="icon edit" @click.stop="handleEdit(item)" v-if="!item.isEdit && !item.disabled">
             <svg xmlns="http://www.w3.org/2000/svg" role="img" class="iconify iconify--ri" width="1em" height="1em" viewBox="0 0 24 24">
               <path
@@ -72,11 +72,7 @@
       </ul>
     </div>
     <div class="left-footer" v-if="source!='chatJs'">
-      AI客服由
-      <a style="color: #4183c4;margin-left: 2px;margin-right: 2px" href="https://www.qiaoqiaoyun.com/aiCustomerService" target="_blank">
-        敲敲云
-      </a>
-      提供
+
     </div>
   </div>
 </template>
@@ -95,10 +91,10 @@
   //新建聊天
   const handleCreate = () => {
     const uuid = getUuid();
-    props.dataSource.history.unshift({ title: '新建聊天', id: uuid, isEdit: false, disabled: true });
+    // props.dataSource.history.unshift({ title: '新建聊天', id: uuid, isEdit: false, disabled: true });
     // 新建第一个(需要高亮选中)
-    props.dataSource.active = uuid;
-    emit('click', "新建聊天", 0);
+    // props.dataSource.active = uuid;
+    // emit('click', "新建聊天", 0);
   };
   // 切换聊天
   const handleToggleChat = (item, index) => {

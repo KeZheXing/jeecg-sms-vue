@@ -89,7 +89,7 @@
     dataSource.value = {
       active: '1002',
       usingContext: true,
-      history: [{ id: '1002', title: '新建聊天', isEdit: false, disabled: true }],
+      history: [],
     };
     chatTitle.value = '新建聊天';
     chatActiveKey.value = 0;
@@ -174,7 +174,7 @@
   const { getIsMobile } = useAppInject();
   //来源
   const source = ref<string>('');
-  
+
   /**
    * 初始化聊天信息
    * @param appId
@@ -222,9 +222,9 @@
         initChartData()
       }, 5000);
       quickCommandData.value = [
-          { name: '请介绍一下JeecgBoot', descr: "请介绍一下JeecgBoot" },
-          { name: 'JEECG有哪些优势？', descr: "JEECG有哪些优势？" },
-          { name: 'JEECG可以做哪些事情？', descr: "JEECG可以做哪些事情？" },];
+          { name: 'nice to meet you too', descr: "nice to meet you too" },
+          { name: 'Hi', descr: "Hi" },
+          { name: 'how old are you', descr: "how old are you" },];
     }
     let query: any = router.currentRoute.value.query;
     source.value = query.source;
@@ -242,7 +242,7 @@
     presetQuestion.value = "";
     quickCommandData.value = [];
   })
-  
+
   /**
    * 获取应用id
    *
@@ -262,10 +262,10 @@
           appData.value = res.result;
           if (res.result && res.result.prologue) {
             prologue.value = res.result.prologue;
-          }  
+          }
           if (res.result && res.result.quickCommand) {
             quickCommandData.value = JSON.parse(res.result.quickCommand);
-          } 
+          }
           if (res.result && res.result.presetQuestion) {
             presetQuestion.value = res.result.presetQuestion;
           }
@@ -314,7 +314,7 @@
     }
 
   }
-  
+
   /**
    * 初始化聊天：用于icon点击
    */
@@ -323,7 +323,7 @@
     getApplicationData(value);
     initChartData(value);
   }
-  
+
   defineExpose({
     initChat
   })

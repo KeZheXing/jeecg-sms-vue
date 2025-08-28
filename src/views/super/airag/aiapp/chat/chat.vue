@@ -4,11 +4,7 @@
       <div class="header-title" v-if="type === 'view' && headerTitle">
         {{headerTitle}}
         <div v-if="showAdvertising" class="header-advertisint">
-          AI客服由
-          <a style="color: #4183c4;margin-left: 2px;margin-right: 2px" href="https://www.qiaoqiaoyun.com/aiCustomerService" target="_blank">
-            敲敲云
-          </a>
-          提供
+
         </div>
       </div>
       <div class="main">
@@ -230,7 +226,7 @@
   const globSetting = useGlobSetting();
   const baseUploadUrl = globSetting.uploadUrl;
   const uploadUrl = ref<string>(`${baseUploadUrl}/airag/chat/upload`);
-  
+
   function handleEnter(event: KeyboardEvent) {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
@@ -1081,7 +1077,7 @@
       display: flex;
     }
   }
-  
+
   @media (max-width: 600px) {
     //手机下的样式 平板不需要调整
     .footer{
