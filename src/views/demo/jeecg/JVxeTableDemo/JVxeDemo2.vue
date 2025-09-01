@@ -164,7 +164,7 @@
       let radio = random(0, 2);
       values.push({
         id: buildUUID(),
-        select_dict_search: ['admin', '', 'jeecg'][random(0, 2)],
+        select_dict_search: ['', '', ''][random(0, 2)],
         progress: random(0, 100),
         radio: radio ? radio.toString() : null,
       });

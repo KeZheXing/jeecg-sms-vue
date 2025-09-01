@@ -16,7 +16,7 @@
           :class="[item.id == dataSource.active ? 'active' : 'normal', dataSource.history.length == 1 ? 'last' : '']"
           @click="handleToggleChat(item, index)"
         >
-          <i class="icon message" :style="item.conversationStatus=='1'?'color:green':(item.conversationStatus=='2'?'color:red':'')">
+          <i class="icon message" :style="item.conversationStatus=='4'?'color:green':(item.conversationStatus=='2'?'color:red':'')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"

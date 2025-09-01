@@ -192,7 +192,7 @@
     prefixCls: 'ai-chat-message',
   });
 
-  const props = defineProps(['uuid', 'prologue', 'formState', 'url', 'type','historyData','chatTitle','presetQuestion','quickCommandData','showAdvertising']);
+  const props = defineProps(['uuid', 'prologue', 'formState', 'url', 'type','historyData','chatTitle','presetQuestion','quickCommandData','showAdvertising','loadMessageList']);
   const emit = defineEmits(['save','reload-message-title']);
   const { scrollRef, scrollToBottom } = useScroll();
   const prompt = ref<string>('');
@@ -237,6 +237,7 @@
     let message = prompt.value;
     if (!message || message.trim() === '') return;
     prompt.value = '';
+    props.loadMessageList();
     onConversation(message);
   }
   const handleOutQuestion = (message) => {

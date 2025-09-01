@@ -2,6 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { Modal } from 'ant-design-vue';
 
 enum Api {
+  messageList = '/sms/device/messageList',
   list = '/sys/sysAnnouncementSend/getMyAnnouncementSend',
   editCementSend = '/sys/sysAnnouncementSend/editByAnntIdAndUserId',
   readAllMsg = '/sys/sysAnnouncementSend/readAll',
@@ -15,6 +16,14 @@ enum Api {
  */
 export const getMyNewsList = (params) => {
   return defHttp.get({ url: Api.list, params });
+};
+
+/**
+ * 查询消息列表
+ * @param params
+ */
+export const getMessageList = (params) => {
+  return defHttp.get({ url: Api.messageList, params });
 };
 
 /**

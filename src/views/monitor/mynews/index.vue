@@ -15,7 +15,7 @@
   import { ref, onMounted } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import DetailModal from './DetailModal.vue';
-  import { getMyNewsList, editCementSend, syncNotic, readAllMsg, getOne } from './mynews.api';
+  import { getMyNewsList, editCementSend, syncNotic, readAllMsg, getOne,getMessageList } from './mynews.api';
   import { columns, searchFormSchema } from './mynews.data';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { getToken } from '/@/utils/auth';
@@ -50,8 +50,12 @@
   const { prefixCls, tableContext } = useListPage({
     designScope: 'mynews-list',
     tableProps: {
+      defSort: {
+        column: 'datetime',
+        order: 'desc',
+      },
       title: '我的消息',
-      api: getMyNewsList,
+      api: getMessageList,
       columns: columns,
       formConfig: {
         schemas: searchFormSchema,
@@ -76,10 +80,10 @@
    */
   function getActions(record) {
     return [
-      {
-        label: '查看',
-        onClick: handleDetail.bind(null, record),
-      },
+      // {
+      //   label: '查看',
+      //   onClick: handleDetail.bind(null, record),
+      // },
     ];
   }
 

@@ -2,6 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { Modal } from 'ant-design-vue';
 import { isObject } from '/@/utils/is';
 enum Api {
+  deviceDebug ='/sms/device/debug',
   deviceList = '/sms/device/listAll',
   deviceEdit = '/sms/device/edit',
   deviceSave = '/sms/device/add',
@@ -225,6 +226,16 @@ export const saveOrUpdateAgent = (params) => {
  */
 export const deleteAgent = (params, handleSuccess) => {
   return defHttp.delete({ url: Api.deleteAgent, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess();
+  });
+};
+
+/**
+ * 代理删除
+ * @param params
+ */
+export const deviceDebug = (params, handleSuccess) => {
+  return defHttp.post({ url: Api.deviceDebug, params }, { joinParamsToUrl: true }).then(() => {
     handleSuccess();
   });
 };

@@ -12,6 +12,7 @@ export enum Api {
   deleteBatch = '/sys/message/sysMessageTemplate/deleteBatch',
   exportXls = 'sys/message/sysMessageTemplate/exportXls',
   importXls = 'sys/message/sysMessageTemplate/importExcel',
+  importTaskXls = 'sms/message/importExcel',
   save = '/sys/message/sysMessageTemplate/add',
   edit = '/sys/message/sysMessageTemplate/edit',
   // 发送测试

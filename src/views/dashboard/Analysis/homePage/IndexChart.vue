@@ -1,19 +1,19 @@
 <template>
   <div class="p-4">
     <ChartGroupCard class="enter-y" :loading="loading" type="chart" />
-    <SaleTabCard class="!my-4 enter-y" :loading="loading" />
-    <a-row>
-      <a-col :span="24">
-        <a-card :loading="loading" :bordered="false" title="最近一周访问量统计">
-          <div class="infoArea">
-            <HeadInfo title="今日IP" :iconColor="ipColor" :content="loginfo.todayIp" icon="environment"></HeadInfo>
-            <HeadInfo title="今日访问" :iconColor="visitColor" :content="loginfo.todayVisitCount" icon="team"></HeadInfo>
-            <HeadInfo title="总访问量" :iconColor="seriesColor" :content="loginfo.totalVisitCount" icon="rise"></HeadInfo>
-          </div>
-          <LineMulti :chartData="lineMultiData" height="33vh" type="line" :option="{ legend: { top: 'bottom' } }"></LineMulti>
-        </a-card>
-      </a-col>
-    </a-row>
+<!--    <SaleTabCard class="!my-4 enter-y" :loading="loading" />-->
+<!--    <a-row>-->
+<!--      <a-col :span="24">-->
+<!--        <a-card :loading="loading" :bordered="false" title="最近一周访问量统计">-->
+<!--          <div class="infoArea">-->
+<!--            <HeadInfo title="今日IP" :iconColor="ipColor" :content="loginfo.todayIp" icon="environment"></HeadInfo>-->
+<!--            <HeadInfo title="今日访问" :iconColor="visitColor" :content="loginfo.todayVisitCount" icon="team"></HeadInfo>-->
+<!--            <HeadInfo title="总访问量" :iconColor="seriesColor" :content="loginfo.totalVisitCount" icon="rise"></HeadInfo>-->
+<!--          </div>-->
+<!--          <LineMulti :chartData="lineMultiData" height="33vh" type="line" :option="{ legend: { top: 'bottom' } }"></LineMulti>-->
+<!--        </a-card>-->
+<!--      </a-col>-->
+<!--    </a-row>-->
   </div>
 </template>
 <script lang="ts" setup>
@@ -22,7 +22,7 @@
   import SaleTabCard from '../components/SaleTabCard.vue';
   import LineMulti from '/@/components/chart/LineMulti.vue';
   import HeadInfo from '/@/components/chart/HeadInfo.vue';
-  import { getLoginfo, getVisitInfo } from '../api.ts';
+  import { getLoginfo, getVisitInfo,panel } from '../api.ts';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 
   const loading = ref(true);

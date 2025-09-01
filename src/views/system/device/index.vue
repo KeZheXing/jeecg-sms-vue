@@ -72,7 +72,7 @@
   const [registerTenUserModal, { openModal: tenUserOpenModal }] = useModal();
   import { useMessage } from '/@/hooks/web/useMessage';
   import { columns, searchFormSchema } from './user.data';
-  import { listNoCareTenant, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch, deviceList } from './user.api';
+  import { listNoCareTenant, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch, deviceList,deviceDebug } from './user.api';
   import { usePermission } from '/@/hooks/web/usePermission';
   import TenantUserModal from '@/views/system/tenant/components/TenantUserList.vue';
   import TenantInviteUserModal from '@/views/system/tenant/components/TenantInviteUserModal.vue';
@@ -251,10 +251,17 @@
         label: '编辑',
         onClick: handleEdit.bind(null, record),
         // ifShow: () => hasPermission('system:user:edit'),
+      }, {
+        label: '调试',
+        onClick: debug.bind(null,record),
+        // ifShow: () => hasPermission('system:user:edit'),
       }
     ];
   }
 
+  function  debug(record){
+    deviceDebug(record, handleSuccess);
+  }
 
   /**
    * 查看用户

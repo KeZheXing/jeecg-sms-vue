@@ -48,6 +48,10 @@
   const { prefixCls, onExportXls, onImportXls, tableContext } = useListPage({
     designScope: 'message-template',
     tableProps: {
+      defSort: {
+        column: 'createdTime',
+        order: 'desc',
+      },
       title: '消息中心模板列表数据',
       api: list,
       columns: columns,
@@ -60,7 +64,7 @@
       name: '消息中心模板列表',
     },
     importConfig: {
-      url: Api.importXls,
+      url: Api.importTaskXls,
       success: () => reload(),
     },
   });

@@ -45,33 +45,41 @@ export const growCardList: GrowCardItem[] = [
 
 export const chartCardList: GrowCardItem[] = [
   {
-    title: '总销售额',
+    title: '余额',
     icon: 'visit-count|svg',
-    total: 126560,
-    value: 234.56,
-    footer: '日均销售额',
+    total: 0,
+    value: 0,
   },
   {
-    title: '订单量',
-    icon: 'total-sales|svg',
-    value: 1234,
-    total: 8846,
-    color: 'blue',
-    footer: '日订单量',
+    title: '今日发送',
+    icon: 'visit-count|svg',
+    total: 0,
+    value: 0,
   },
   {
-    title: '支付笔数',
-    icon: 'download-count|svg',
-    value: 60,
-    total: 6560,
-    color: 'orange',
-    footer: '转化率',
+    title: '今日接收',
+    icon: 'visit-count|svg',
+    total: 0,
+    value: 0,
   },
   {
-    title: '运营活动效果',
-    icon: 'transaction|svg',
-    total: 78,
+    title: '今日失败',
+    icon: 'visit-count|svg',
+    total: 0,
+    value: 0,
   },
+  {
+    title: '今日添加任务',
+    icon: 'visit-count|svg',
+    total: 0,
+    value: 0,
+  },
+  {
+    title: '今日处理任务',
+    icon: 'visit-count|svg',
+    total: 0,
+    value: 0,
+  }
 ];
 export const bdcCardList: GrowCardItem[] = [
   {

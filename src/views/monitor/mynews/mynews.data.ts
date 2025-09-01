@@ -3,92 +3,70 @@ import { render } from '/@/utils/common/renderUtils';
 
 export const columns: BasicColumn[] = [
   {
-    title: '标题',
-    dataIndex: 'titile',
+    title: '设备编号',
+    dataIndex: 'deviceCode',
     width: 100,
     align: 'left',
   },
   {
-    title: '消息类型',
-    dataIndex: 'msgCategory',
+    title: '客户信息',
+    dataIndex: 'customer',
+    width: 80,
+  },
+  {
+    title: '内容',
+    dataIndex: 'content',
+    width: 80,
+  },
+  {
+    title: '消息时间',
+    dataIndex: 'datetime',
+    width: 80,
+  },
+  {
+    title: '消息状态',
+    dataIndex: 'messageStatus',
     width: 80,
     customRender: ({ text }) => {
       return render.renderDictNative(
         text,
         [
-          { label: '通知公告', value: '1', color: 'blue' },
-          { label: '系统消息', value: '2' },
+          { label: '待确认', value: '0', color: '' },
+          { label: '发送待确认', value: '1' },
+          { label: '发送已确认', value: '2' },
+          { label: '落地失败', value: '3' },
+          { label: '接收', value: '4' }
         ],
         true
       );
     },
-  },
-  {
-    title: '发布人',
-    dataIndex: 'sender',
-    width: 80,
-  },
-  {
-    title: '发布时间',
-    dataIndex: 'sendTime',
-    width: 80,
-  },
-  {
-    title: '优先级',
-    dataIndex: 'priority',
-    width: 80,
-    customRender: ({ text }) => {
-      const color = text == 'L' ? 'blue' : text == 'M' ? 'yellow' : 'red';
-      return render.renderTag(render.renderDict(text, 'priority'), color);
-    },
-  },
-  {
-    title: '阅读状态',
-    dataIndex: 'readFlag',
-    width: 80,
-    customRender: ({ text }) => {
-      return render.renderDictNative(
-        text,
-        [
-          { label: '未读', value: '0', color: 'red' },
-          { label: '已读', value: '1' },
-        ],
-        true
-      );
-    },
-  },
+  }
 ];
 
 export const searchFormSchema: FormSchema[] = [
   {
-    field: 'titile',
-    label: '标题',
+    field: 'deviceCode',
+    label: '设备编号',
     component: 'Input',
     colProps: { span: 6 },
   },
   {
-    field: 'sender',
-    label: '发布人',
+    field: 'customer',
+    label: '客户信息',
     component: 'Input',
     colProps: { span: 6 },
   },
   {
-    field: 'sendTime',
-    label: '发布时间',
-    component: 'RangeDate',
-    componentProps: {
-      valueType: 'Date',
-    },
-    colProps: { span: 6 },
-  },
-  {
-    field: 'msgCategory',
-    label: '消息类型',
+    field: 'messageStatus',
+    label: '消息状态',
     component: 'Select',
     componentProps: {
       options: [
-        { label: '通知公告', value: '1' },
-        { label: '系统消息', value: '2' },
+        { label: '待处理', value: '0' },
+        { label: '发送待确认', value: '1' },
+        { label: '发送已确认', value: '2' },
+        { label: '落地失败', value: '3' },
+        { label: '接收', value: '4' },
       ],
     },
     colProps: { span: 6 },

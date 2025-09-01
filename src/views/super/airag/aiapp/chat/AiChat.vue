@@ -19,6 +19,7 @@
       <div class="rightArea" :class="[expand ? 'expand' : 'shrink']">
         <chat
           url="/airag/chat/send"
+          :loadMessageList="updateSendTime"
           v-if="uuid && chatVisible"
           :uuid="uuid"
           :historyData="chatData"
@@ -56,6 +57,7 @@
   let timer: any = null;
   let unwatch01: any = null;
   const dataSource = ref<any>({});
+  const sendTime = ref<any>({});
   const uuid = ref<string>('');
   const chatData = ref<any>([]);
   const expand = ref<any>(true);
@@ -157,7 +159,7 @@
                 chatVisible.value = true;
               });
             });
-          }, 5000);
+          }, 10000);
 
         }else{
           chatData.value = [];
@@ -206,6 +208,10 @@
       }).finally(()=>{
         loading.value = false
     });
+  }
+
+  function updateSendTime(){
+    sendTime.value = new Date().getTime()
   }
 
   onMounted(() => {

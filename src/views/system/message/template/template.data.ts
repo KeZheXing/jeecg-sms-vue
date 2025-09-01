@@ -33,7 +33,7 @@ export const columns: BasicColumn[] = [
         return '待处理';
       } else if (text == '1') {
         return '已发送';
-      }else if (text == '1') {
+      }else if (text == '2') {
         return '失败';
       }
     },
@@ -59,7 +59,7 @@ export const searchFormSchema: FormSchema[] = [
         return '待处理';
       } else if (text == '1') {
         return '已发送';
-      }else if (text == '1') {
+      }else if (text == '2') {
         return '失败';
       }
     },
@@ -90,7 +90,7 @@ export const formSchemas: FormSchema[] = [
     field: 'targetNums',
     component: 'InputTextArea',
     componentProps: {
-      placeholder: "英文逗号分隔",
+      placeholder: "一行一个输入",
       autoSize: {
         minRows: 8,
         maxRows: 8,
