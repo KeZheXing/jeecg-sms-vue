@@ -40,6 +40,14 @@ export const columns: BasicColumn[] = [
     width: 100,
   },
   {
+    title: '回复率',
+    dataIndex: 'replyTask',
+    width: 100,
+    customRender: ({ text }) => {
+      return text+'%';
+    },
+  },
+  {
     title: '状态',
     dataIndex: 'status_dictText',
     width: 80,

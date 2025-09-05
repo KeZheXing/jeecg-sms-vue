@@ -237,7 +237,6 @@
     let message = prompt.value;
     if (!message || message.trim() === '') return;
     prompt.value = '';
-    props.loadMessageList();
     onConversation(message);
   }
   const handleOutQuestion = (message) => {
@@ -277,7 +276,6 @@
     if (lastContext && usingContext.value) {
       options = { ...lastContext };
     }
-
     addChat(uuid.value, {
       dateTime: new Date().toLocaleString(),
       content: '正在确认发送结果...',
@@ -484,6 +482,7 @@
       let result = decoder.decode(value, { stream: true });
       result = buffer + result;
       const lines = result.split('\n\n');
+      props.loadMessageList();
       for (let line of lines) {
         if (line.startsWith('data:')) {
           let content = line.replace('data:', '').trim();

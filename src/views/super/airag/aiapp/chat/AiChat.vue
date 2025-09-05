@@ -212,6 +212,7 @@
 
   function updateSendTime(){
     sendTime.value = new Date().getTime()
+    initChartData()
   }
 
   onMounted(() => {

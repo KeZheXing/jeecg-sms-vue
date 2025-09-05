@@ -5,7 +5,7 @@
     <div class="aui-logo" v-if="!getIsMobile">
       <div>
         <h3>
-          <img :src="logoImg" alt="jeecg" />
+<!--          <img :src="logoImg" alt="jeecg" />-->
         </h3>
       </div>
     </div>
@@ -18,7 +18,7 @@
           <div class="aui-form">
             <div class="aui-image">
               <div class="aui-image-text">
-                <img :src="adTextImg" />
+<!--                <img :src="adTextImg" />-->
               </div>
             </div>
             <div class="aui-formBox">
@@ -27,9 +27,9 @@
                   <div class="aui-flex-box" :class="activeIndex === 'accountLogin' ? 'activeNav on' : ''" @click="loginClick('accountLogin')"
                     >{{ t('sys.login.signInFormTitle') }}
                   </div>
-                  <div class="aui-flex-box" :class="activeIndex === 'phoneLogin' ? 'activeNav on' : ''" @click="loginClick('phoneLogin')"
-                    >{{ t('sys.login.mobileSignInFormTitle') }}
-                  </div>
+<!--                  <div class="aui-flex-box" :class="activeIndex === 'phoneLogin' ? 'activeNav on' : ''" @click="loginClick('phoneLogin')"-->
+<!--                    >{{ t('sys.login.mobileSignInFormTitle') }}-->
+<!--                  </div>-->
                 </div>
                 <div class="aui-form-box" style="height: 180px">
                   <a-form ref="loginRef" :model="formData" v-if="activeIndex === 'accountLogin'" @keyup.enter.native="loginHandleClick">
@@ -63,13 +63,13 @@
                             <span style="margin-left: 5px">{{ t('sys.login.rememberMe') }}</span>
                           </div>
                         </div>
-                        <div class="aui-forget">
-                          <a @click="forgetHandelClick"> {{ t('sys.login.forgetPassword') }}</a>
-                        </div>
+<!--                        <div class="aui-forget">-->
+<!--                          <a @click="forgetHandelClick"> {{ t('sys.login.forgetPassword') }}</a>-->
+<!--                        </div>-->
                       </div>
                     </div>
                   </a-form>
-                  <a-form v-else ref="phoneFormRef" :model="phoneFormData" @keyup.enter.native="loginHandleClick">
+                  <a-form v-else ref="phoneFormRef" :model="phoneFormData" @keyup.enter.native=" loginHandleClick">
                     <div class="aui-account phone">
                       <div class="aui-inputClear phoneClear">
                         <a-input class="fix-auto-fill" :placeholder="t('sys.login.mobile')" v-model:value="phoneFormData.mobile" />
@@ -91,42 +91,42 @@
                     <a-button :loading="loginLoading" class="aui-link-login" type="primary" @click="loginHandleClick">
                       {{ t('sys.login.loginButton') }}</a-button>
                   </div>
-                  <div class="aui-flex">
-                    <a class="aui-linek-code aui-flex-box" @click="codeHandleClick">{{ t('sys.login.qrSignInFormTitle') }}</a>
-                  </div>
-                  <div class="aui-flex">
-                    <a class="aui-linek-code aui-flex-box" @click="registerHandleClick">{{ t('sys.login.registerButton') }}</a>
-                  </div>
+<!--                  <div class="aui-flex">-->
+<!--                    <a class="aui-linek-code aui-flex-box" @click="codeHandleClick">{{ t('sys.login.qrSignInFormTitle') }}</a>-->
+<!--                  </div>-->
+<!--                  <div class="aui-flex">-->
+<!--                    <a class="aui-linek-code aui-flex-box" @click="registerHandleClick">{{ t('sys.login.registerButton') }}</a>-->
+<!--                  </div>-->
                 </div>
               </div>
               <a-form @keyup.enter.native="loginHandleClick">
-                <div class="aui-flex aui-third-text">
-                  <div class="aui-flex-box aui-third-border">
-                    <span>{{ t('sys.login.otherSignIn') }}</span>
-                  </div>
-                </div>
-                <div class="aui-flex" :class="`${prefixCls}-sign-in-way`">
-                  <div class="aui-flex-box">
-                    <div class="aui-third-login">
-                      <a title="github" @click="onThirdLogin('github')"><GithubFilled /></a>
-                    </div>
-                  </div>
-                  <div class="aui-flex-box">
-                    <div class="aui-third-login">
-                      <a title="企业微信" @click="onThirdLogin('wechat_enterprise')"><icon-font class="item-icon" type="icon-qiyeweixin3" /></a>
-                    </div>
-                  </div>
-                  <div class="aui-flex-box">
-                    <div class="aui-third-login">
-                      <a title="钉钉" @click="onThirdLogin('dingtalk')"><DingtalkCircleFilled /></a>
-                    </div>
-                  </div>
-                  <div class="aui-flex-box">
-                    <div class="aui-third-login">
-                      <a title="微信" @click="onThirdLogin('wechat_open')"><WechatFilled /></a>
-                    </div>
-                  </div>
-                </div>
+<!--                <div class="aui-flex aui-third-text">-->
+<!--                  <div class="aui-flex-box aui-third-border">-->
+<!--                    <span>{{ t('sys.login.otherSignIn') }}</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="aui-flex" :class="`${prefixCls}-sign-in-way`">-->
+<!--                  <div class="aui-flex-box">-->
+<!--                    <div class="aui-third-login">-->
+<!--                      <a title="github" @click="onThirdLogin('github')"><GithubFilled /></a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="aui-flex-box">-->
+<!--                    <div class="aui-third-login">-->
+<!--                      <a title="企业微信" @click="onThirdLogin('wechat_enterprise')"><icon-font class="item-icon" type="icon-qiyeweixin3" /></a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="aui-flex-box">-->
+<!--                    <div class="aui-third-login">-->
+<!--                      <a title="钉钉" @click="onThirdLogin('dingtalk')"><DingtalkCircleFilled /></a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="aui-flex-box">-->
+<!--                    <div class="aui-third-login">-->
+<!--                      <a title="微信" @click="onThirdLogin('wechat_open')"><WechatFilled /></a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
               </a-form>
             </div>
           </div>
@@ -144,7 +144,7 @@
     </div>
     <!-- 第三方登录相关弹框 -->
     <ThirdModal ref="thirdModalRef"></ThirdModal>
-    
+
     <!-- 图片验证码弹窗 -->
     <CaptchaModal @register="captchaRegisterModal" @ok="getLoginCode" />
   </div>
@@ -194,8 +194,8 @@
   //账号登录表单字段
   const formData = reactive<any>({
     inputCode: '',
-    username: 'admin',
-    password: '123456',
+    username: '',
+    password: '',
   });
   //手机登录表单字段
   const phoneFormData = reactive<any>({
@@ -564,7 +564,7 @@ html[data-theme='dark'] {
     -webkit-text-fill-color: #c9d1d9 !important;
     box-shadow: inherit !important;
   }
-  
+
   .ant-divider-inner-text {
     font-size: 12px !important;
     color: @text-color-secondary !important;

@@ -117,7 +117,7 @@
       chartCardList[3].total = res.result.failed
       chartCardList[4].total = res.result.addTask
       chartCardList[5].total = res.result.handleTask
-
+      chartCardList[6].total = res.result.replyTask + '%'
       dataList.value = chartCardList
     }
   });

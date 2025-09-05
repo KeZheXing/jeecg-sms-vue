@@ -79,6 +79,12 @@ export const chartCardList: GrowCardItem[] = [
     icon: 'visit-count|svg',
     total: 0,
     value: 0,
+  },
+  {
+    title: '回复率',
+    icon: 'visit-count|svg',
+    total: 0,
+    value: 0,
   }
 ];
 export const bdcCardList: GrowCardItem[] = [
