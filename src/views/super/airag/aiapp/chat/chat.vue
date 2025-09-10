@@ -865,6 +865,7 @@
     () => props.historyData,
     (val) => {
       try {
+        scrollToBottom();
         //update-begin---author:wangshuai---date:2025-03-06---for:【QQYUN-11384】浏览器打开应用开场白丢了---
         if (val && val.length > 0) {
           chatData.value = cloneDeep(val);

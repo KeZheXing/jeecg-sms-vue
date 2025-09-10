@@ -67,7 +67,15 @@
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { columns, searchFormSchema } from './user.data';
-  import { listNoCareTenant, deleteUser, batchDeleteUser, getImportUrl, getExportUrl, frozenBatch } from './user.api';
+  import {
+    listNoCareTenant,
+    deleteUser,
+    batchDeleteUser,
+    getImportUrl,
+    getExportUrl,
+    frozenBatch,
+    clearTask
+  } from './user.api';
   import {usePermission} from "/@/hooks/web/usePermission";
 
   const { createMessage, createConfirm } = useMessage();
@@ -157,6 +165,16 @@
       return;
     }
     await deleteUser({ id: record.id }, reload);
+  }
+  /**
+   * 清理事件
+   */
+  async function handleClear(record) {
+    if ('admin' == record.username) {
+      createMessage.warning('管理员账号不允许此操作！');
+      return;
+    }
+    await clearTask({ id: record.id }, reload);
   }
   /**
    * 批量删除事件
@@ -255,6 +273,13 @@
         label: '密码',
         //auth: 'user:changepwd',
         onClick: handleChangePassword.bind(null, record.username),
+      },
+      {
+        label: '清理任务',
+        popConfirm: {
+          title: '是否确认清理',
+          confirm: handleClear.bind(null, record),
+        },
       },
       {
         label: '删除',

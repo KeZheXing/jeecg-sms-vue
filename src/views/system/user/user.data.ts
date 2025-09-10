@@ -132,7 +132,7 @@ export const formSchema: FormSchema[] = [
         message: '请输入登录密码',
       },
       {
-        pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
+        // pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
         message: '密码由8位数字、大小写字母和特殊符号组成!',
       },
     ],
@@ -167,13 +167,13 @@ export const formSchema: FormSchema[] = [
     required: true,
     component: 'Input',
   },
-  {
-    label: '工号',
-    field: 'workNo',
-    required: true,
-    component: 'Input',
-    dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'work_no', model, schema, true),
-  },
+  // {
+  //   label: '工号',
+  //   field: 'workNo',
+  //   required: true,
+  //   component: 'Input',
+  //   dynamicRules: ({ model, schema }) => rules.duplicateCheckRule('sys_user', 'work_no', model, schema, true),
+  // },
   {
     label: '职务',
     field: 'post',
@@ -285,30 +285,30 @@ export const formSchema: FormSchema[] = [
       stringToNumber: true,
     },
   },
-  {
-    label: '邮箱',
-    field: 'email',
-    component: 'Input',
-    required: true,
-    dynamicRules: ({ model, schema }) => {
-      return [
-        { ...rules.duplicateCheckRule('sys_user', 'email', model, schema, true)[0], trigger: 'blur' },
-        { ...rules.rule('email', false)[0], trigger: 'blur' },
-      ];
-    },
-  },
-  {
-    label: '手机号码',
-    field: 'phone',
-    component: 'Input',
-    required: true,
-    dynamicRules: ({ model, schema }) => {
-      return [
-        { ...rules.duplicateCheckRule('sys_user', 'phone', model, schema, true)[0], trigger: 'blur' },
-        { pattern: /^1[3456789]\d{9}$/, message: '手机号码格式有误', trigger: 'blur' },
-      ];
-    },
-  },
+  // {
+  //   label: '邮箱',
+  //   field: 'email',
+  //   component: 'Input',
+  //   required: true,
+  //   dynamicRules: ({ model, schema }) => {
+  //     return [
+  //       { ...rules.duplicateCheckRule('sys_user', 'email', model, schema, true)[0], trigger: 'blur' },
+  //       { ...rules.rule('email', false)[0], trigger: 'blur' },
+  //     ];
+  //   },
+  // },
+  // {
+  //   label: '手机号码',
+  //   field: 'phone',
+  //   component: 'Input',
+  //   required: true,
+  //   dynamicRules: ({ model, schema }) => {
+  //     return [
+  //       { ...rules.duplicateCheckRule('sys_user', 'phone', model, schema, true)[0], trigger: 'blur' },
+  //       { pattern: /^1[3456789]\d{9}$/, message: '手机号码格式有误', trigger: 'blur' },
+  //     ];
+  //   },
+  // },
   {
     label: '座机',
     field: 'telephone',

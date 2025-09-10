@@ -38,13 +38,20 @@ export const columns: BasicColumn[] = [
     title: '回复率',
     dataIndex: 'reply',
     width: 80,
+  },{
+    title: '设备通道',
+    dataIndex: 'deviceChannel',
+    width: 80,
+    customRender: ({ text }) => {
+      return text == '0' ? '卡发' : text == '1' ? 'JERRY' : '';
+    },
   },
   {
     title: '设备状态',
     dataIndex: 'deviceStatus',
     width: 80,
     customRender: ({ text }) => {
-      return render.renderDict(text, 'is_open');
+      return text == 'Y' ? '是' : text == 'N' ? '否' : '';
     },
   },
 ];
@@ -86,7 +93,7 @@ export const searchFormSchema: FormSchema[] = [
   },
   {
     label: '设备状态',
-    field: 'deviceCode',
+    field: 'deviceStatus',
     component: 'JDictSelectTag',
     componentProps: {
       dictCode: 'is_open',
@@ -139,6 +146,11 @@ export const formSchema: FormSchema[] = [
     field: 'sendLimit',
     required: true,
     component: 'Input',
+  }, {
+    label: '其他信息',
+    field: 'deviceOtherInfo',
+    required: false,
+    component: 'Input',
   },  {
     label: '设备状态',
     field: 'deviceStatus',
@@ -148,10 +160,19 @@ export const formSchema: FormSchema[] = [
       placeholder: '是否启动',
     },
   },{
+    field: 'deviceChannel',
+    component: 'Select',
+    label: '设备渠道',
+    componentProps: {
+      options:[
+        {label:'卡发',value:0},
+        {label:'JEERY',value:1}
+      ]
+    }
+  },{
     field: 'bindUser',
     component: 'UserSelect',
     label: '绑定用户',
-    store:'username',
     helpMessage: ['component模式'],
     colProps: { span: 12 },
     componentProps: {

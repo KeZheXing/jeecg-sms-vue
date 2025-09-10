@@ -12,6 +12,7 @@ enum Api {
   getUserRole = '/sys/user/queryUserRole',
   duplicateCheck = '/sys/duplicate/check',
   deleteUser = '/sys/user/delete',
+  clearTask = '/sys/user/clearTask',
   deleteBatch = '/sys/user/deleteBatch',
   importExcel = '/sys/user/importExcel',
   exportXls = '/sys/user/exportXls',
@@ -64,6 +65,15 @@ export const getUserRoles = (params) => defHttp.get({ url: Api.getUserRole, para
  */
 export const deleteUser = (params, handleSuccess) => {
   return defHttp.delete({ url: Api.deleteUser, params }, { joinParamsToUrl: true }).then(() => {
+    handleSuccess();
+  });
+};
+
+/**
+ * 清理任务
+ */
+export const clearTask = (params, handleSuccess) => {
+  return defHttp.delete({ url: Api.clearTask, params }, { joinParamsToUrl: true }).then(() => {
     handleSuccess();
   });
 };

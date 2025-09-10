@@ -141,6 +141,7 @@
             } else {
               chatData.value = [];
             }
+            initChartData()
             chatVisible.value = false;
             nextTick(() => {
               chatVisible.value = true;
@@ -154,7 +155,7 @@
               } else {
                 chatData.value = [];
               }
-              chatVisible.value = false;
+              // chatVisible.value = false;
               nextTick(() => {
                 chatVisible.value = true;
               });
